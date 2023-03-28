@@ -5,7 +5,7 @@ SELECT DISTINCT(CITY) FROM STATION WHERE CITY REGEXP '^[AEIOUaeiou]' AND CITY RE
 -- Note: Learned about 'regexp' function.
 
 
--- Question 02: 
+-- Question 02 (Weather Observation): 
 -- Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
 select distinct(city) from station where 
 city like "%a" or city like "%e" or city like "%i"
@@ -88,7 +88,7 @@ FROM TRIANGLES;
 -- Note: Learned to use 'case' function
 
 
--- Question 13 (The Pad):
+-- Question 13 (The PADS Challenge):
 -- Sub 1:
 -- Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession 
 -- as a parenthetical (i.e.: enclosed in parentheses). For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S)
