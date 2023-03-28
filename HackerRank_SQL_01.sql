@@ -1,6 +1,6 @@
 -- Question 01 (Weather Observation Station):
 -- Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) 
--- as both their first and last characters. Your result cannot contain duplicates.
+-- (contd) as both their first and last characters. Your result cannot contain duplicates.
 SELECT DISTINCT(CITY) FROM STATION WHERE CITY REGEXP '^[AEIOUaeiou]' AND CITY REGEXP '[AEIOUaeiou]$';
 -- Note: Learned about 'regexp' function.
 
@@ -91,12 +91,12 @@ FROM TRIANGLES;
 -- Question 13 (The PADS Challenge):
 -- Sub 1:
 -- Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession 
--- as a parenthetical (i.e.: enclosed in parentheses). For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S)
+-- (contd) as a parenthetical (i.e.: enclosed in parentheses). For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S)
 
 -- Sub 2:
 -- Query the number of ocurrences of each occupation in OCCUPATIONS. Sort the occurrences in ascending order, and output them in the following format
--- where [occupation_count] is the number of occurrences of an occupation in OCCUPATIONS and [occupation] is the lowercase occupation name. 
--- If more than one Occupation has the same [occupation_count], they should be ordered alphabetically.
+-- (contd) where [occupation_count] is the number of occurrences of an occupation in OCCUPATIONS and [occupation] is the lowercase occupation name. 
+-- (contd) If more than one Occupation has the same [occupation_count], they should be ordered alphabetically.
 (select concat(name, '(',left(OCCUPATION,1),')') from OCCUPATIONS) 
 union 
 (select concat('There are a total of', ' ', count(OCCUPATION), ' ',lower(occupation), 's.') from OCCUPATIONS group by OCCUPATION) order by 1;
@@ -175,8 +175,8 @@ select round((max(lat_n)-min(lat_n)) + (max(long_w)-min(long_w)), 4) from statio
 
 -- Question 20 (Euclidean Distance - Weather Observation Station):
 -- Condider P1(a,c) and P2(c,d) to be two points on a 2D plane where (a,b) are the respective minimum and maximum values of Northern Latitude (LAT_N)
--- and (c,d) are the respective minimum and maximum values of Western Longitude (LONG_W) in STATION.
--- Query Euclidean distance between P1 and P2 with 4 decimal points.
+-- (contd) and (c,d) are the respective minimum and maximum values of Western Longitude (LONG_W) in STATION.
+-- (contd) Query Euclidean distance between P1 and P2 with 4 decimal points.
 select round(sqrt(power((max(lat_n)-min(lat_n)), 2) + power((max(long_w)-min(long_w)), 2)), 4) from station;
 -- Note: Learned 'SQRT()', 'POWER()' functions along with concept of "Euclidean Distance".
 
