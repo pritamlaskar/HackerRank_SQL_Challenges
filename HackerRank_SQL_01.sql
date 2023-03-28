@@ -1,11 +1,11 @@
--- Question 01 (Weather Observation):
+-- Question 01 (Weather Observation Station):
 -- Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) 
 -- as both their first and last characters. Your result cannot contain duplicates.
 SELECT DISTINCT(CITY) FROM STATION WHERE CITY REGEXP '^[AEIOUaeiou]' AND CITY REGEXP '[AEIOUaeiou]$';
 -- Note: Learned about 'regexp' function.
 
 
--- Question 02 (Weather Observation): 
+-- Question 02 (Weather Observation Station): 
 -- Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
 select distinct(city) from station where 
 city like "%a" or city like "%e" or city like "%i"
@@ -13,7 +13,7 @@ or city like "%o" or city like "%u";
 -- Note: Learned that (like "%x") return fields  ending with "x".
 
 
--- Question 03 (Weather Observation): 
+-- Question 03 (Weather Observation Station): 
 -- Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
 select distinct(city) from station where city 
 like "a%" or city like "e%" or city like "i%"
@@ -21,19 +21,19 @@ or city like "o%" or city like "u%";
 -- Learned that (like "x%") return fields begining with "x".
 
 
--- Question 04 (Weather Observation):
+-- Question 04 (Weather Observation Station):
 -- Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
 select distinct(city) from station where city not rlike '^[AEIOUaeiou].*$';
 -- Note: Example of rlike.
 
 
--- Question 05 (Weather Observation):
+-- Question 05 (Weather Observation Station):
 -- Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
 select distinct(city) from station where city not regexp '[aeiou]$';
 -- Note: Example of not regexp function.
 
 
--- Question 06 (Weather Observation):
+-- Question 06 (Weather Observation Station):
 -- Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
 select distinct(city) from station where
 city not regexp '^[aeiou].*' or 
@@ -99,7 +99,7 @@ FROM TRIANGLES;
 -- If more than one Occupation has the same [occupation_count], they should be ordered alphabetically.
 (select concat(name, '(',left(OCCUPATION,1),')') from OCCUPATIONS) 
 union 
-(select concat('There are a total of', ' ', count(OCCUPATION), ' ',lower(occupation), 's.') from OCCUPATIONS group by OCCUPATION) order by 1
+(select concat('There are a total of', ' ', count(OCCUPATION), ' ',lower(occupation), 's.') from OCCUPATIONS group by OCCUPATION) order by 1;
 -- Note: Learned to use 'union'.
 
 
@@ -152,20 +152,20 @@ group by company.company_code, company.founder;
 -- Note: Learned to tackle Error 1055 by adding company.founder in group by as error 1055 appears when we group by using only company.company_code.
                     
                     
--- Question 17 (Rounding - Weather Station):
+-- Question 17 (Rounding - Weather Observation Station):
 -- Query The sum of all values in LAT_N and LONG_W rounded to a scale of 2 decimal places.
 select round(sum(LAT_N), 2), round(sum(LONG_W), 2) from STATION;
 -- Mote: Learned 'round' function.
 
 
--- Question 18 (Subquery with rounding - Weather Station):
+-- Question 18 (Subquery with rounding - Weather Observation Station):
 -- Query the Western Longitude (LONG_W) for the largest Northern Latitude (LAT_N) in STATION that is less than 137.2345 . Round your answer to 4 decimal places.
 select round(max(long_w), 4) from station
 where lat_n = (select max(lat_n) from station where lat_n < 137.2345);
 -- A basic example of using subqueries. 
 
 
--- Question 19 (Manhatten Distance Challenge - Weather Station): 
+-- Question 19 (Manhatten Distance Challenge - Weather Observation Station): 
 -- Consider p1(a,b) and p2(c,d) to be two points on a 2D plane.
 -- (contd) a happens to equal the minimum value in Northern Latitude (LAT_N in STATION) ; b happens to equal the minimum value in Western Longitude (LONG_W in STATION)
 -- (contd) c happens to equal the maximum value in Northern Latitude (LAT_N in STATION); d happens to equal the maximum value in Western Longitude (LONG_W in STATION).
@@ -173,7 +173,7 @@ where lat_n = (select max(lat_n) from station where lat_n < 137.2345);
 select round((max(lat_n)-min(lat_n)) + (max(long_w)-min(long_w)), 4) from station;
 
 
--- Question 20 (Euclidean Distance - Weather Station):
+-- Question 20 (Euclidean Distance - Weather Observation Station):
 -- Condider P1(a,c) and P2(c,d) to be two points on a 2D plane where (a,b) are the respective minimum and maximum values of Northern Latitude (LAT_N)
 -- and (c,d) are the respective minimum and maximum values of Western Longitude (LONG_W) in STATION.
 -- Query Euclidean distance between P1 and P2 with 4 decimal points.
@@ -181,7 +181,7 @@ select round(sqrt(power((max(lat_n)-min(lat_n)), 2) + power((max(long_w)-min(lon
 -- Note: Learned 'SQRT()', 'POWER()' functions along with concept of "Euclidean Distance".
 
 
--- Question 21 (Median - Weather Station):
+-- Question 21 (Median - Weather Observation Station):
 -- A median is defined as a number separating the higher half of a data set from the lower half. 
 -- (contd) Query the median of the Northern Latitudes (LAT_N) from STATION and round your answer to 4 decimal places.
 WITH row_n as (
