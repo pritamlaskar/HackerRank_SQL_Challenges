@@ -78,13 +78,13 @@ where (months*salary) = (select max(months*salary) from employee);
 
 
 -- Question 12 (Triangle Challenge):
-SELECT CASE 
-WHEN A + B <= C OR A + C <= B OR B + C <= A THEN 'Not A Triangle' 
-WHEN A = B AND B = C THEN 'Equilateral' 
-WHEN A = B OR B = C OR A = C THEN 'Isosceles' 
-ELSE 'Scalene' 
-END as case1
-FROM TRIANGLES;
+selece case
+when a + b <= c or a + c <= b or b + c <= a then 'Not A Triangle'
+when a = b and b = c then 'Equilateral'
+when a = b or b = c or a = c then 'Isosceles'
+else 'Scalene'
+end as case 1
+from triangles; 
 -- Note: Learned to use 'case' function
 
 
@@ -107,13 +107,13 @@ union
 -- Pivot the Occupation column in OCCUPATIONS so that each Name is sorted alphabetically and displayed underneath its corresponding Occupation. 
 -- (contd) The output column headers should be Doctor, Professor, Singer, and Actor, respectively.
 -- (contd) Print NULL when there are no more names corresponding to an occupation.
-SELECT 
-MAX(CASE WHEN Occupation='Doctor' THEN Name ELSE NULL END) AS 'Doctor',
-MAX(CASE WHEN Occupation='Professor' THEN Name ELSE NULL END) AS 'Professor',
-MAX(CASE WHEN Occupation='Singer' THEN Name ELSE NULL END) AS 'Singer',
-MAX(CASE WHEN Occupation='Actor' THEN Name ELSE NULL END) AS 'Actor' 
-FROM ( SELECT * , ROW_NUMBER() OVER(PARTITION BY occupation ORDER BY name) AS rnumber 
-FROM occupations ) a GROUP BY rnumber;
+select 
+max(case when occupation='Doctor' then name else null end) as 'Doctor',
+max(case when occupation='Professor' then name else null end) as 'Professor', 
+max(case when occupation='Singer' then name else null end) as 'Singer',
+max(case when occupation='Actor' then name else null end) as 'Actor' 
+from (select * , row_number() over(partition by occupation order by name) as row1
+from occupations) a group by row1;
 -- Note: Learned to use 'case' statement to create a 'pivot' with string values in MySQL.
    
    
@@ -184,16 +184,16 @@ select round(sqrt(power((max(lat_n)-min(lat_n)), 2) + power((max(long_w)-min(lon
 -- Question 21 (Median - Weather Observation Station):
 -- A median is defined as a number separating the higher half of a data set from the lower half. 
 -- (contd) Query the median of the Northern Latitudes (LAT_N) from STATION and round your answer to 4 decimal places.
-WITH row_n as (
-SELECT lat_n, 
-ROW_NUMBER() OVER(ORDER BY lat_n) as rn
-FROM station
+with row_n as (
+select lat_n, 
+row_number() over(order by lat_n) as rn
+from station
 ),
 med as (
-SELECT (COUNT(*) + 1) / 2 as cnt 
-FROM row_n
+select (count(*) + 1) / 2 as cnt 
+from row_n
 )
-SELECT ROUND(lat_n, 4)
-FROM row_n, med
-WHERE rn = cnt;
+select round(lat_n, 4)
+from row_n, med
+where rn = cnt;
 -- Note: Learned to find median value using 'row_number()', 'window function', and 'with' clause.
